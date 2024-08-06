@@ -16,14 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from DABubble.views import LoginView, RegistrationView
+from DABubble.views import RegistrationView, LoginView
 from django.conf import settings
 from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view()),
     path('register/', RegistrationView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
 ]
 
 if settings.DEBUG:
