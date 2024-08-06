@@ -25,8 +25,12 @@ SECRET_KEY = 'django-insecure-gtfw*)_myz1m1@rxq(@dd(z!=6yv)dpcs=x9mz$9j4mtg066jf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
+CORS_ALLOWED_ORIGINS = ['http://localhost:4200','127.0.0.1']
 
 # Application definition
 
@@ -38,17 +42,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'DABubble'
+    'DABubble',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'DABubble_Backend.urls'
@@ -123,3 +132,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "http://127.0.0.1",
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1'
+]

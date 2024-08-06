@@ -16,7 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from DABubble.views import LoginView, RegistrationView
+from django.conf import settings
+from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view()),
+    path('register/', RegistrationView.as_view(), name='register'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
