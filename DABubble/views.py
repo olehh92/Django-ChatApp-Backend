@@ -7,6 +7,11 @@ from rest_framework import status
 from rest_framework import generics
 from django.contrib.auth.models import User
 from .serializers import CustomAuthTokenSerializer
+from .models import AvatarModel
+from .serializers import AvatarModelSerializer
+from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 logger = logging.getLogger(__name__)
@@ -67,3 +72,14 @@ class RegistrationView(generics.CreateAPIView):
             'user_id': user.pk,
             'email': user.email
         })
+        
+class AvatarModelViewSet(viewsets.ModelViewSet):
+    queryset = AvatarModel.objects.all()
+    serializer_class = AvatarModelSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Hier wird der authentifizierte Benutzer dem Avatar zugewiesen
+        if self.request.user.is_authenticated:
+            serializer.save(user=self.request.user)

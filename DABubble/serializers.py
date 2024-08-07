@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from .models import AvatarModel
 
 class RegistrationSerializer(serializers.ModelSerializer):
 
@@ -38,3 +39,19 @@ class CustomAuthTokenSerializer(serializers.Serializer):
 
         data['user'] = user
         return data
+    
+class AvatarModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvatarModel
+        fields = ['id', 'user', 'image', 'image_path']
+        read_only_fields = ['user']  # Verhindert, dass das 'user'-Feld vom Client gesetzt wird
+
+    def validate(self, data):
+        # Setze den Standardwert für image_path, wenn image nicht gesetzt ist
+        if not data.get('image') and not data.get('image_path'):
+            data['image_path'] = AvatarModel.default_image_path
+        return data
+
+    def create(self, validated_data):
+        # Das user-Feld sollte hier nicht gesetzt werden, weil es in der View zugewiesen wird
+        return AvatarModel.objects.create(**validated_data)
