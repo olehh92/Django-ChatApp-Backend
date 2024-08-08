@@ -12,6 +12,7 @@ from .serializers import AvatarModelSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 
 
 logger = logging.getLogger(__name__)
@@ -83,3 +84,12 @@ class AvatarModelViewSet(viewsets.ModelViewSet):
         # Hier wird der authentifizierte Benutzer dem Avatar zugewiesen
         if self.request.user.is_authenticated:
             serializer.save(user=self.request.user)
+            
+class LogoutView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        # Löschen des Tokens
+        request.auth.delete()
+        return Response({'detail': 'Logged out successfully'}, status=status.HTTP_200_OK)
