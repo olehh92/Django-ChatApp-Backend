@@ -93,3 +93,12 @@ class LogoutView(APIView):
         # Löschen des Tokens
         request.auth.delete()
         return Response({'detail': 'Logged out successfully'}, status=status.HTTP_200_OK)
+    
+
+class UserView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, *args, **kwargs):
+        users = User.objects.all().values('id', 'first_name', 'last_name', 'email', 'username')
+        return Response(list(users), status=status.HTTP_200_OK)
