@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import AvatarModel
+from rest_framework.serializers import ModelSerializer
 
 class RegistrationSerializer(serializers.ModelSerializer):
 
@@ -55,3 +56,8 @@ class AvatarModelSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Das user-Feld sollte hier nicht gesetzt werden, weil es in der View zugewiesen wird
         return AvatarModel.objects.create(**validated_data)
+    
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'id']

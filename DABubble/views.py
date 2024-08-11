@@ -13,6 +13,7 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from .serializers import UserSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -95,10 +96,27 @@ class LogoutView(APIView):
         return Response({'detail': 'Logged out successfully'}, status=status.HTTP_200_OK)
     
 
-class UserView(APIView):
+class UsersView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
     def get(self, request, *args, **kwargs):
         users = User.objects.all().values('id', 'first_name', 'last_name', 'email', 'username')
         return Response(list(users), status=status.HTTP_200_OK)
+    
+    def put(self, request, *args, **kwargs):
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ActiveUserView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
