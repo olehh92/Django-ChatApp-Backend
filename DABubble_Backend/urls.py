@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from DABubble.views import RegistrationView, LoginView, AvatarModelViewSet, LogoutView, UsersView, ActiveUserView
+from DABubble.views import RegistrationView, LoginView, AvatarModelViewSet, LogoutView, UsersView, ActiveUserView, AvatarUserModelView
 from django.conf import settings
 from django.conf.urls import include
 from rest_framework.routers import DefaultRouter
@@ -33,7 +33,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('users/', UsersView.as_view(), name='users'),
     path('users/<int:id>', UsersView.as_view(), name='users'),
-    path('user/', ActiveUserView.as_view(), name='user')
+    path('user/', ActiveUserView.as_view(), name='user'),
+    path("activeUserImage/", AvatarUserModelView.as_view(), name="activeUserImage"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

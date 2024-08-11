@@ -86,6 +86,24 @@ class AvatarModelViewSet(viewsets.ModelViewSet):
         if self.request.user.is_authenticated:
             serializer.save(user=self.request.user)
             
+
+class AvatarUserModelView(APIView):
+    serializer_class= AvatarModelSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        
+        try:
+            avatar = AvatarModel.objects.get(user=user)  # AvatarModel für den authentifizierten Benutzer abrufen
+        except AvatarModel.DoesNotExist:
+            return Response({"error": "Avatar not found for the user."}, status=status.HTTP_404_NOT_FOUND)
+
+        # AvatarModel-Objekt serialisieren
+        serializer = AvatarModelSerializer(avatar)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+            
 class LogoutView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
