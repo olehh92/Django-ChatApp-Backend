@@ -17,3 +17,8 @@ class AvatarModel(models.Model):
 
     def __str__(self):
         return self.image.name if self.image else self.image_path
+    
+class ChannelModel(models.Model):
+    channelName = models.CharField(max_length=250, blank=False, null=False)
+    channelDescription = models.CharField(max_length=250, blank=False, null=False)
+    channelMember = models.ManyToManyField(User, related_name="channels")

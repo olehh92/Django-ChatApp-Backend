@@ -8,7 +8,7 @@ from rest_framework import generics
 from django.contrib.auth.models import User
 from .serializers import CustomAuthTokenSerializer
 from .models import AvatarModel
-from .serializers import AvatarModelSerializer
+from .serializers import AvatarModelSerializer, ChannelSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -138,3 +138,15 @@ class ActiveUserView(APIView):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+class ChannelView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def put(self, request, *args, **kwargs):
+        serializer = ChannelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

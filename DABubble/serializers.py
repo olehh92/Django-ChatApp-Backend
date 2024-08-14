@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import AvatarModel
+from .models import AvatarModel, ChannelModel
 from rest_framework.serializers import ModelSerializer
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -61,3 +61,11 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'id']
+        
+        
+class ChannelSerializer(ModelSerializer):
+    channelMembers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+
+    class Meta:
+        model = ChannelModel
+        fields = ['id', 'channelName', 'channelDescription', 'channelMembers']
