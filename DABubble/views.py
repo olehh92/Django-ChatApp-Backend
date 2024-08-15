@@ -2,18 +2,17 @@ import logging
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-from .serializers import RegistrationSerializer
+from .serializers import RegistrationSerializer, UserSerializer, MessageSerializer, ChannelSerializer
 from rest_framework import status
 from rest_framework import generics
 from django.contrib.auth.models import User
 from .serializers import CustomAuthTokenSerializer
-from .models import AvatarModel
+from .models import AvatarModel, ChannelModel, MessageModel
 from .serializers import AvatarModelSerializer, ChannelSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from .serializers import UserSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -150,3 +149,24 @@ class ChannelView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request, *args, **kwargs):
+        channels = ChannelModel.objects.all()
+        serializer = ChannelSerializer(channels, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class MessageView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        channel_id = kwargs.get('channel_id')
+        channel = ChannelModel.objects.get(id=channel_id)
+        serializer = MessageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(sender=request.user, channel=channel)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+        

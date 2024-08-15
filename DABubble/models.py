@@ -21,4 +21,10 @@ class AvatarModel(models.Model):
 class ChannelModel(models.Model):
     channelName = models.CharField(max_length=250, blank=False, null=False)
     channelDescription = models.CharField(max_length=250, blank=False, null=False)
-    channelMember = models.ManyToManyField(User, related_name="channels")
+    channelMembers = models.ManyToManyField(User, related_name="channels")
+
+class MessageModel(models.Model):
+    channel = models.ForeignKey(ChannelModel, related_name='messages', on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, related_name='messages', on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
