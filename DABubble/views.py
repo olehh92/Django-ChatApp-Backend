@@ -155,6 +155,19 @@ class ChannelView(APIView):
         serializer = ChannelSerializer(channels, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+class SingleChannelView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, *args, **kwargs):
+        channel_id = kwargs.get('channel_id')
+        try:
+            channel = ChannelModel.objects.get(id=channel_id)
+            serializer = ChannelSerializer(channel)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except ChannelModel.DoesNotExist:
+            return Response({'error': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
+    
 class MessageView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
