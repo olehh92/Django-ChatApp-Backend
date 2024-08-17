@@ -35,7 +35,7 @@ urlpatterns = [
     path('users/<int:id>', UsersView.as_view(), name='users'),
     path('user/', ActiveUserView.as_view(), name='user'),
     path("activeUserImage/", AvatarUserModelView.as_view(), name="activeUserImage"),
-    path("channel/", ChannelView.as_view(), name="channel"),
+    path("channel", ChannelView.as_view(), name="channel"),
     path("channel/<int:channel_id>/message", MessageView.as_view(), name="channel-messages"),
     path("channel/<int:channel_id>/", SingleChannelView.as_view(), name="singleChannel")
 ]

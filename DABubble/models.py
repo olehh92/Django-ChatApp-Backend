@@ -22,9 +22,10 @@ class ChannelModel(models.Model):
     channelName = models.CharField(max_length=250, blank=False, null=False)
     channelDescription = models.CharField(max_length=250, blank=False, null=False)
     channelMembers = models.ManyToManyField(User, related_name="channels")
+    createdFrom = models.CharField(max_length=250, blank=False, null=False)
 
 class MessageModel(models.Model):
-    channel = models.ForeignKey(ChannelModel, related_name='messages', on_delete=models.CASCADE)
-    sender = models.ForeignKey(User, related_name='messages', on_delete=models.CASCADE)
+    channel = models.ForeignKey(ChannelModel, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)

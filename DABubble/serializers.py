@@ -67,6 +67,7 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = MessageModel
         fields = ['id', 'channel', 'sender', 'content', 'timestamp']
+        read_only_fields = ['sender']
         
 class ChannelSerializer(serializers.ModelSerializer):
     channelMembers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
@@ -74,6 +75,6 @@ class ChannelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ChannelModel
-        fields = ['id', 'channelName', 'channelDescription', 'channelMembers', 'messages']
+        fields = ['id', 'channelName', 'channelDescription', 'channelMembers', 'messages', 'createdFrom']
         
         

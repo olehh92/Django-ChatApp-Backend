@@ -174,12 +174,27 @@ class MessageView(APIView):
 
     def post(self, request, *args, **kwargs):
         channel_id = kwargs.get('channel_id')
-        channel = ChannelModel.objects.get(id=channel_id)
+        try:
+            channel = ChannelModel.objects.get(id=channel_id)
+        except ChannelModel.DoesNotExist:
+            return Response({'detail': 'Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        user = request.user
         serializer = MessageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(sender=request.user, channel=channel)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request, *args, **kwargs):
+        channel_id = kwargs.get('channel_id')
+        try:
+            channel = ChannelModel.objects.get(id=channel_id)
+            messages = MessageModel.objects.filter(channel = channel) # Filtere Nachrichte nach nur aus diesem Channel
+            serializer = MessageSerializer(messages, many = True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except ChannelModel.DoesNotExist:
+            return Response({'error': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
     
     
         
