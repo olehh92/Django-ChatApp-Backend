@@ -37,7 +37,7 @@ urlpatterns = [
     path("activeUserImage/", AvatarUserModelView.as_view(), name="activeUserImage"),
     path("channel", ChannelView.as_view(), name="channel"),
     path("channel/<int:channel_id>/message", MessageView.as_view(), name="channel-messages"),
-    path("channel/<int:channel_id>/", SingleChannelView.as_view(), name="singleChannel")
+    path("channel/<int:channel_id>", SingleChannelView.as_view(), name="singleChannel")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
