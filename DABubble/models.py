@@ -29,3 +29,9 @@ class MessageModel(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    
+class PrivateChannelModel(models.Model):
+    channelName = models.CharField(max_length=250, blank=False, null=False)
+    channelDescription = models.CharField(max_length=250, blank=False, null=False)
+    createdFrom = models.CharField(max_length=250, blank=False, null=False)
+    channelMembers = models.ManyToManyField(User, related_name="private_channels")

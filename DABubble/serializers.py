@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import AvatarModel, ChannelModel, MessageModel
+from .models import AvatarModel, ChannelModel, MessageModel, PrivateChannelModel
 from rest_framework.serializers import ModelSerializer
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -71,10 +71,16 @@ class MessageSerializer(serializers.ModelSerializer):
         
 class ChannelSerializer(serializers.ModelSerializer):
     channelMembers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
-    messages = MessageSerializer(many=True, read_only=True)  # Neue Zeile für die Nachrichten
+    messages = MessageSerializer(many=True, read_only=True) 
 
     class Meta:
         model = ChannelModel
         fields = ['id', 'channelName', 'channelDescription', 'channelMembers', 'messages', 'createdFrom']
         
-        
+class privateChannelSerializer(serializers.ModelSerializer):
+    channelMembers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+    messages = MessageSerializer(many=True, read_only=True) 
+
+    class Meta:
+        model = PrivateChannelModel
+        fields = ['id', 'channelName', 'channelDescription', 'channelMembers', 'messages', 'createdFrom']
