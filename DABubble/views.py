@@ -2,12 +2,12 @@ import logging
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-from .serializers import RegistrationSerializer, UserSerializer, MessageSerializer, ChannelSerializer, privateChannelSerializer
+from .serializers import RegistrationSerializer, UserSerializer, MessageSerializer, ChannelSerializer
 from rest_framework import status
 from rest_framework import generics
 from django.contrib.auth.models import User
 from .serializers import CustomAuthTokenSerializer
-from .models import AvatarModel, ChannelModel, MessageModel, PrivateChannelModel
+from .models import AvatarModel, ChannelModel, MessageModel
 from .serializers import AvatarModelSerializer, ChannelSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
@@ -144,7 +144,7 @@ class ChannelView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def put(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         serializer = ChannelSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -210,38 +210,5 @@ class MessageView(APIView):
         except ChannelModel.DoesNotExist:
             return Response({'error': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
     
-class PrivateChannelView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def put(self, request, *args, **kwargs):
-        member_ids = request.data.get('channelMembers')
-        if len(member_ids) >= 3:
-            return Response({'error': 'A private channel must have exactly two members.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        existing_channels = PrivateChannelModel.objects.annotate(
-            num_members=models.Count('channelMembers')
-        ).filter(
-            num_members=2
-        ).filter(
-            channelMembers=member_ids[0]
-        ).filter(
-            channelMembers=member_ids[1]
-        ).distinct()
-
-        if existing_channels.exists():
-            return Response({'error': 'A private channel between these users already exists.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = privateChannelSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def get(self, request, *args, **kwargs):
-        user = request.user
-        channels = PrivateChannelModel.objects.filter(channelMembers=user)
-        serializer = privateChannelSerializer(channels, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
     
         

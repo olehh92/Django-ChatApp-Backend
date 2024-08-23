@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from DABubble.views import RegistrationView, LoginView, AvatarModelViewSet, LogoutView, UsersView, ActiveUserView, AvatarUserModelView, ChannelView, MessageView, SingleChannelView, PrivateChannelView
+from DABubble.views import RegistrationView, LoginView, AvatarModelViewSet, LogoutView, UsersView, ActiveUserView, AvatarUserModelView, ChannelView, MessageView, SingleChannelView
 from django.conf import settings
 from django.conf.urls import include
 from rest_framework.routers import DefaultRouter
@@ -38,8 +38,6 @@ urlpatterns = [
     path("channel/", ChannelView.as_view(), name="channel"),
     path("channel/<int:channel_id>/message", MessageView.as_view(), name="channel-messages"),
     path("channel/<int:channel_id>", SingleChannelView.as_view(), name="singleChannel"),
-    path("private-channel/", PrivateChannelView.as_view(), name="private_channel"),
-    path("private-channel/<int:channel_id>", PrivateChannelView.as_view(), name="single_private_channel"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
