@@ -2,18 +2,20 @@ import logging
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-from .serializers import RegistrationSerializer, UserSerializer, MessageSerializer, ChannelSerializer
+from .serializers import RegistrationSerializer, UserSerializer, MessageSerializer, ChannelSerializer, ThreadChannelSerializer, ThreadMessageSerializer
 from rest_framework import status
 from rest_framework import generics
 from django.contrib.auth.models import User
 from .serializers import CustomAuthTokenSerializer
-from .models import AvatarModel, ChannelModel, MessageModel
+from .models import AvatarModel, ChannelModel, MessageModel, ThreadChannelModel, ThreadMessageModel
 from .serializers import AvatarModelSerializer, ChannelSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from django.db import models
+from django.shortcuts import get_object_or_404
+from rest_framework.permissions import AllowAny
 
 
 logger = logging.getLogger(__name__)
@@ -37,6 +39,7 @@ class LoginView(ObtainAuthToken):
 
 class RegistrationView(generics.CreateAPIView):
     serializer_class = RegistrationSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, context={'request': request})
@@ -143,23 +146,26 @@ class ActiveUserView(APIView):
 class ChannelView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    
+
     def post(self, request, *args, **kwargs):
-        serializer = ChannelSerializer(data=request.data)
+        data = request.data.copy() 
+        data['createdFrom'] = request.user.id  
+
+        serializer = ChannelSerializer(data=data) 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def get(self, request, *args, **kwargs):
         channels = ChannelModel.objects.all()
         serializer = ChannelSerializer(channels, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
 class SingleChannelView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    
+
     def get(self, request, *args, **kwargs):
         channel_id = kwargs.get('channel_id')
         try:
@@ -168,8 +174,7 @@ class SingleChannelView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except ChannelModel.DoesNotExist:
             return Response({'error': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
-        
-        
+
     def put(self, request, *args, **kwargs):
         channel_id = kwargs.get('channel_id')
         try:
@@ -178,37 +183,106 @@ class SingleChannelView(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except ChannelModel.DoesNotExist:
-            return Response({'error': 'Channel name cant updated'}, status=status.HTTP_404_NOT_FOUND)
-    
+            return Response({'error': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
+
 class MessageView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         channel_id = kwargs.get('channel_id')
-        try:
-            channel = ChannelModel.objects.get(id=channel_id)
-        except ChannelModel.DoesNotExist:
-            return Response({'detail': 'Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
-        
+        thread_channel_id = kwargs.get('thread_channel_id')
         user = request.user
-        serializer = MessageSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(sender=request.user, channel=channel)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+        
+        if thread_channel_id:
+            try:
+                thread_channel = ThreadChannelModel.objects.get(id=thread_channel_id)
+            except ThreadChannelModel.DoesNotExist:
+                return Response({'detail': 'Thread Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+            serializer = ThreadMessageSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(sender=user, thread_channel=thread_channel)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            try:
+                channel = ChannelModel.objects.get(id=channel_id)
+            except ChannelModel.DoesNotExist:
+                return Response({'detail': 'Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+            serializer = MessageSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(sender=request.user, channel=channel)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def get(self, request, *args, **kwargs):
         channel_id = kwargs.get('channel_id')
+        thread_channel_id = kwargs.get('thread_channel_id')
+        
+        if thread_channel_id:
+            try:
+                thread_channel = ThreadChannelModel.objects.get(id=thread_channel_id)
+                messages = ThreadMessageModel.objects.filter(thread_channel=thread_channel)
+                serializer = ThreadMessageSerializer(messages, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except ThreadChannelModel.DoesNotExist:
+                return Response({'detail': 'Thread Channel not found'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            try:
+                channel = ChannelModel.objects.get(id=channel_id)
+                messages = MessageModel.objects.filter(channel=channel)
+                serializer = MessageSerializer(messages, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except ChannelModel.DoesNotExist:
+                return Response({'detail': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    def patch(self, request, *args, **kwargs):
+        channel_id = kwargs.get('channel_id')
+        message_id = kwargs.get('message_id')
+
         try:
             channel = ChannelModel.objects.get(id=channel_id)
-            messages = MessageModel.objects.filter(channel = channel) # Filtere Nachrichte nach nur aus diesem Channel
-            serializer = MessageSerializer(messages, many = True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except ChannelModel.DoesNotExist:
-            return Response({'error': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
-    
-    
+            message = MessageModel.objects.get(id=message_id, channel=channel)
+        except (ChannelModel.DoesNotExist, MessageModel.DoesNotExist):
+            return Response({'detail': 'Message or Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        thread_open = request.data.get('threadOpen', message.threadOpen)
+        thread_channel_id = None
+
+        if thread_open and not message.thread_channel:
+            thread_channel = ThreadChannelModel.objects.create(
+                threadName=f'Thread for message {message.id}',
+                threadDescription=f'Thread started from message {message.id} in channel {channel_id}',
+                mainChannel=channel,
+                createdFrom=request.user,
+                original_message=message
+            )
+            thread_channel.threadMember.add(request.user)
+
+            message.thread_channel = thread_channel
+            message.threadOpen = True
+            message.save()
+
+            ThreadMessageModel.objects.create(
+                sender=message.sender,
+                content=message.content,
+                thread_channel=thread_channel
+            )
+            thread_channel_id = thread_channel.id
+
+        else:
+            message.threadOpen = thread_open
+            message.save()
+
+        serializer = MessageSerializer(message)
+        response_data = serializer.data
+        if thread_channel_id:
+            response_data['thread_channel_id'] = thread_channel_id
+
+        return Response(response_data, status=status.HTTP_200_OK)
+        
         

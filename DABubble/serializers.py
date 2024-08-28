@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import AvatarModel, ChannelModel, MessageModel
+from .models import AvatarModel, ChannelModel, MessageModel, ThreadMessageModel, ThreadChannelModel
 from rest_framework.serializers import ModelSerializer
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -63,18 +63,31 @@ class UserSerializer(ModelSerializer):
         fields = ['first_name', 'last_name', 'email', 'id']
         
         
+class ThreadMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ThreadMessageModel
+        fields = ['id', 'sender', 'content', 'timestamp']
+        read_only_fields = ['sender']
+
 class MessageSerializer(serializers.ModelSerializer):
+    thread_channel = serializers.PrimaryKeyRelatedField(read_only=True)  # Read-only for now
+
     class Meta:
         model = MessageModel
-        fields = ['id', 'channel', 'sender', 'content', 'timestamp']
+        fields = ['id', 'channel', 'sender', 'content', 'timestamp', 'threadOpen', 'thread_channel']
         read_only_fields = ['sender']
-        
+
 class ChannelSerializer(serializers.ModelSerializer):
+    messages = MessageSerializer(many=True, read_only=True)  # Channel has many messages
     channelMembers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
-    messages = MessageSerializer(many=True, read_only=True) 
 
     class Meta:
         model = ChannelModel
         fields = ['id', 'channelName', 'channelDescription', 'channelMembers', 'messages', 'createdFrom', 'privateChannel']
-        
-  
+
+class ThreadChannelSerializer(serializers.ModelSerializer):
+    thread_messages = ThreadMessageSerializer(many=True, read_only=True)  # Thread has many messages
+
+    class Meta:
+        model = ThreadChannelModel
+        fields = ['id', 'threadName', 'threadDescription', 'mainChannel', 'createdFrom', 'threadMember', 'original_message', 'thread_messages']
