@@ -80,6 +80,7 @@ class MessageSerializer(serializers.ModelSerializer):
 class ChannelSerializer(serializers.ModelSerializer):
     messages = MessageSerializer(many=True, read_only=True)  # Channel has many messages
     channelMembers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+    createdFrom = UserSerializer(read_only=True)
 
     class Meta:
         model = ChannelModel

@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from DABubble.views import (RegistrationView, LoginView, 
                             AvatarModelViewSet, LogoutView, UsersView, ActiveUserView, 
-                            AvatarUserModelView, ChannelView, MessageView, SingleChannelView)
+                            AvatarUserModelView, ChannelView, MessageView, SingleChannelView, ThreadMessageView)
 from django.conf import settings
 from django.conf.urls import include
 from rest_framework.routers import DefaultRouter
@@ -39,6 +39,18 @@ urlpatterns = [
     path('activeUserImage/', AvatarUserModelView.as_view(), name='activeUserImage'),
 
     # Channel URLs
+    # path('channel/', ChannelView.as_view(), name='channel-list'),
+    # path('channel/<int:channel_id>/', SingleChannelView.as_view(), name='channel-detail'),
+# 
+    # Message URLs
+    # path('channel/<int:channel_id>/messages/', MessageView.as_view(), name='message-list'),
+    # path('channel/<int:channel_id>/messages/<int:message_id>/', MessageView.as_view(), name='message-detail'),
+    # 
+    # Message Thread URLs
+    # path('channelThread/<int:thread_channel_id>/messages/', MessageView.as_view(), name='messageThread-send'),
+    # path('channelThread/<int:thread_channel_id>/', MessageView.as_view(), name='messageThread-list')
+    
+    # Channel URLs
     path('channel/', ChannelView.as_view(), name='channel-list'),
     path('channel/<int:channel_id>/', SingleChannelView.as_view(), name='channel-detail'),
 
@@ -46,9 +58,9 @@ urlpatterns = [
     path('channel/<int:channel_id>/messages/', MessageView.as_view(), name='message-list'),
     path('channel/<int:channel_id>/messages/<int:message_id>/', MessageView.as_view(), name='message-detail'),
     
-    # Message Thread URLs
-    path('channelThread/<int:thread_channel_id>/messages/', MessageView.as_view(), name='messageThread-send'),
-    path('channelThread/<int:thread_channel_id>/', MessageView.as_view(), name='messageThread-list')
+    # Thread Message URLs
+    path('channelThread/<int:thread_channel_id>/messages/', ThreadMessageView.as_view(), name='messageThread-list'),
+    path('channelThread/<int:thread_channel_id>/messages/<int:message_id>/', ThreadMessageView.as_view(), name='messageThread-detail')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

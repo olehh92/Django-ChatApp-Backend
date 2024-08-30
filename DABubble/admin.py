@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ChannelModel, ThreadChannelModel, MessageModel
+from .models import ChannelModel, ThreadChannelModel, MessageModel, ThreadMessageModel
 # Register your models here.
 
 class ChannelAdmin(admin.ModelAdmin):
@@ -20,3 +20,9 @@ class ChannelAdmin(admin.ModelAdmin):
     list_display = ("id", "content", "sender")
 
 admin.site.register(MessageModel)
+
+class ChannelAdmin(admin.ModelAdmin):
+    field = ("id", "content", "sender")
+    list_display = ("id", "content", "sender")
+
+admin.site.register(ThreadMessageModel)
