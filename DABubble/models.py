@@ -34,8 +34,10 @@ class MessageModel(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     threadOpen = models.BooleanField(default=False)
     thread_channel = models.ForeignKey('ThreadChannelModel', on_delete=models.SET_NULL, null=True, blank=True, related_name='messages')
-    ## Hier muss noch die Anzahl der Thread Nachrichten hinein!
-
+    emoji_handsup = models.ManyToManyField(User, related_name='emoji_handsup', blank=True)
+    emoji_check = models.ManyToManyField(User, related_name='emoji_check', blank=True)
+    emoji_nerd = models.ManyToManyField(User, related_name='emoji_nerd', blank=True)
+    emoji_rocket = models.ManyToManyField(User, related_name='emoji_rocket', blank=True)
     def __str__(self):
         return f'{self.sender} - {self.content[:20]}'
 

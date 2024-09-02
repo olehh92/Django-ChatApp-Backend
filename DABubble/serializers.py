@@ -71,10 +71,13 @@ class ThreadMessageSerializer(serializers.ModelSerializer):
 
 class MessageSerializer(serializers.ModelSerializer):
     thread_channel = serializers.PrimaryKeyRelatedField(read_only=True)  # Read-only for now
-
+    emoji_handsup = UserSerializer(many=True, required=False)
+    emoji_check = UserSerializer(many=True, required=False)
+    emoji_nerd = UserSerializer(many=True, required=False)
+    emoji_rocket = UserSerializer(many=True, required=False)
     class Meta:
         model = MessageModel
-        fields = ['id', 'channel', 'sender', 'content', 'timestamp', 'threadOpen', 'thread_channel']
+        fields = ['id', 'channel', 'sender', 'content', 'timestamp', 'threadOpen', 'thread_channel', 'emoji_handsup', 'emoji_check', 'emoji_nerd', 'emoji_rocket']
         read_only_fields = ['sender']
 
 class ChannelSerializer(serializers.ModelSerializer):
