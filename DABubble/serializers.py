@@ -64,9 +64,13 @@ class UserSerializer(ModelSerializer):
         
         
 class ThreadMessageSerializer(serializers.ModelSerializer):
+    emoji_handsup = UserSerializer(many=True, required=False)
+    emoji_check = UserSerializer(many=True, required=False)
+    emoji_nerd = UserSerializer(many=True, required=False)
+    emoji_rocket = UserSerializer(many=True, required=False)
     class Meta:
         model = ThreadMessageModel
-        fields = ['id', 'sender', 'content', 'timestamp']
+        fields = ['id', 'sender', 'content', 'timestamp', 'emoji_handsup', 'emoji_check', 'emoji_nerd', 'emoji_rocket']
         read_only_fields = ['sender']
 
 class MessageSerializer(serializers.ModelSerializer):

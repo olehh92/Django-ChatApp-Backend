@@ -395,3 +395,37 @@ class ThreadMessageView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except ThreadChannelModel.DoesNotExist:
             return Response({'detail': 'Thread Channel not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+    def patch(self, request, *args, **kwargs):
+        thread_channel_id = kwargs.get('thread_channel_id')
+        thread_message_id = kwargs.get('thread_message_id')
+        
+        try:
+            threadMessage = ThreadMessageModel.objects.get(id=thread_message_id, channel__id=thread_channel_id)
+        except MessageModel.DoesNotExist:
+            return Response({'detail': 'Message or Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        content = request.data.get('content')
+        if content:
+            threadMessage.content = content
+            
+        # Listen von Diktaten, die die Benutzerdaten enthalten
+        emoji_handsup_users = request.data.get('emoji_handsup', [])
+        emoji_check_users = request.data.get('emoji_check', [])
+        emoji_nerd_users = request.data.get('emoji_nerd', [])
+        emoji_rocket_users = request.data.get('emoji_rocket', [])
+        # Konvertiere die Diktate in User-Objekte
+        handsup_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_handsup_users]
+        check_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_check_users]
+        nerd_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_nerd_users]
+        rocket_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_rocket_users]
+        # Aktualisiere die ManyToMany-Felder mit den User-Objekten
+        threadMessage.emoji_handsup.set(handsup_users)
+        threadMessage.emoji_check.set(check_users)
+        threadMessage.emoji_nerd.set(nerd_users)
+        threadMessage.emoji_rocket.set(rocket_users)
+        
+        threadMessage.save()
+
+        serializer = ThreadMessageSerializer(threadMessage)
+        return Response(serializer.data, status=status.HTTP_200_OK)
