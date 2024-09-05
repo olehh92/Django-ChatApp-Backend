@@ -398,10 +398,10 @@ class ThreadMessageView(APIView):
         
     def patch(self, request, *args, **kwargs):
         thread_channel_id = kwargs.get('thread_channel_id')
-        thread_message_id = kwargs.get('thread_message_id')
+        thread_message_id = kwargs.get('message_id')
         
         try:
-            threadMessage = ThreadMessageModel.objects.get(id=thread_message_id, channel__id=thread_channel_id)
+            threadMessage = ThreadMessageModel.objects.get(id=thread_message_id, thread_channel_id=thread_channel_id)
         except MessageModel.DoesNotExist:
             return Response({'detail': 'Message or Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
         
