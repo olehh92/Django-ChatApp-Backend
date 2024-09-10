@@ -186,104 +186,6 @@ class SingleChannelView(APIView):
         except ChannelModel.DoesNotExist:
             return Response({'error': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
 
-# class MessageView(APIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
-# 
-    # def post(self, request, *args, **kwargs):
-        # channel_id = kwargs.get('channel_id')
-        # thread_channel_id = kwargs.get('thread_channel_id')
-        # user = request.user
-        # 
-        # if thread_channel_id:
-            # try:
-                # thread_channel = ThreadChannelModel.objects.get(id=thread_channel_id)
-            # except ThreadChannelModel.DoesNotExist:
-                # return Response({'detail': 'Thread Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
-# 
-            # serializer = ThreadMessageSerializer(data=request.data)
-            # if serializer.is_valid():
-                # serializer.save(sender=user, thread_channel=thread_channel)
-                # return Response(serializer.data, status=status.HTTP_201_CREATED)
-            # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        # else:
-            # try:
-                # channel = ChannelModel.objects.get(id=channel_id)
-            # except ChannelModel.DoesNotExist:
-                # return Response({'detail': 'Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
-# 
-            # serializer = MessageSerializer(data=request.data)
-            # if serializer.is_valid():
-                # serializer.save(sender=request.user, channel=channel)
-                # return Response(serializer.data, status=status.HTTP_201_CREATED)
-            # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-# 
-    # def get(self, request, *args, **kwargs):
-        # channel_id = kwargs.get('channel_id')
-        # thread_channel_id = kwargs.get('thread_channel_id')
-        # 
-        # if thread_channel_id:
-            # try:
-                # thread_channel = ThreadChannelModel.objects.get(id=thread_channel_id)
-                # messages = ThreadMessageModel.objects.filter(thread_channel=thread_channel)
-                # serializer = ThreadMessageSerializer(messages, many=True)
-                # return Response(serializer.data, status=status.HTTP_200_OK)
-            # except ThreadChannelModel.DoesNotExist:
-                # return Response({'detail': 'Thread Channel not found'}, status=status.HTTP_404_NOT_FOUND)
-        # else:
-            # try:
-                # channel = ChannelModel.objects.get(id=channel_id)
-                # messages = MessageModel.objects.filter(channel=channel)
-                # serializer = MessageSerializer(messages, many=True)
-                # return Response(serializer.data, status=status.HTTP_200_OK)
-            # except ChannelModel.DoesNotExist:
-                # return Response({'detail': 'Channel not found'}, status=status.HTTP_404_NOT_FOUND)
-# 
-    # def patch(self, request, *args, **kwargs):
-        # channel_id = kwargs.get('channel_id')
-        # message_id = kwargs.get('message_id')
-# 
-        # try:
-            # channel = ChannelModel.objects.get(id=channel_id)
-            # message = MessageModel.objects.get(id=message_id, channel=channel)
-        # except (ChannelModel.DoesNotExist, MessageModel.DoesNotExist):
-            # return Response({'detail': 'Message or Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
-# 
-        # thread_open = request.data.get('threadOpen', message.threadOpen)
-        # thread_channel_id = None
-# 
-        # if thread_open and not message.thread_channel:
-            # thread_channel = ThreadChannelModel.objects.create(
-                # threadName=f'Thread for message {message.id}',
-                # threadDescription=f'Thread started from message {message.id} in channel {channel_id}',
-                # mainChannel=channel,
-                # createdFrom=request.user,
-                # original_message=message
-            # )
-            # thread_channel.threadMember.add(request.user)
-# 
-            # message.thread_channel = thread_channel
-            # message.threadOpen = True
-            # message.save()
-# 
-            # ThreadMessageModel.objects.create(
-                # sender=message.sender,
-                # content=message.content,
-                # thread_channel=thread_channel
-            # )
-            # thread_channel_id = thread_channel.id
-# 
-        # else:
-            # message.threadOpen = thread_open
-            # message.save()
-# 
-        # serializer = MessageSerializer(message)
-        # response_data = serializer.data
-        # if thread_channel_id:
-            # response_data['thread_channel_id'] = thread_channel_id
-# 
-        # return Response(response_data, status=status.HTTP_200_OK)
-
 
 class MessageView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -325,22 +227,6 @@ class MessageView(APIView):
         if content:
             message.content = content
 
-        # Listen von Diktaten, die die Benutzerdaten enthalten
-        emoji_handsup_users = request.data.get('emoji_handsup', [])
-        emoji_check_users = request.data.get('emoji_check', [])
-        emoji_nerd_users = request.data.get('emoji_nerd', [])
-        emoji_rocket_users = request.data.get('emoji_rocket', [])
-        # Konvertiere die Diktate in User-Objekte
-        handsup_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_handsup_users]
-        check_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_check_users]
-        nerd_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_nerd_users]
-        rocket_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_rocket_users]
-        # Aktualisiere die ManyToMany-Felder mit den User-Objekten
-        message.emoji_handsup.set(handsup_users)
-        message.emoji_check.set(check_users)
-        message.emoji_nerd.set(nerd_users)
-        message.emoji_rocket.set(rocket_users)
-
         thread_open = request.data.get('threadOpen', message.threadOpen)
         if thread_open and not message.thread_channel:
             thread_channel = ThreadChannelModel.objects.create(
@@ -368,6 +254,40 @@ class MessageView(APIView):
         serializer = MessageSerializer(message)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
+        
+class MessageEmojiView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def patch(self, request, *args, **kwargs):
+        channel_id = kwargs.get('channel_id')
+        message_id = kwargs.get('message_id')
+        
+        try:
+            message = MessageModel.objects.get(id=message_id, channel__id=channel_id)
+        except MessageModel.DoesNotExist:
+            return Response({'detail': 'Message or Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Listen von Diktaten, die die Benutzerdaten enthalten
+        emoji_handsup_users = request.data.get('emoji_handsup', [])
+        emoji_check_users = request.data.get('emoji_check', [])
+        emoji_nerd_users = request.data.get('emoji_nerd', [])
+        emoji_rocket_users = request.data.get('emoji_rocket', [])
+        # Konvertiere die Diktate in User-Objekte
+        handsup_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_handsup_users]
+        check_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_check_users]
+        nerd_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_nerd_users]
+        rocket_users = [User.objects.get(id=user_dict['id']) for user_dict in emoji_rocket_users]
+        # Aktualisiere die ManyToMany-Felder mit den User-Objekten
+        message.emoji_handsup.set(handsup_users)
+        message.emoji_check.set(check_users)
+        message.emoji_nerd.set(nerd_users)
+        message.emoji_rocket.set(rocket_users)
+        
+        message.save()
+
+        serializer = MessageSerializer(message)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class ThreadMessageView(APIView):
     authentication_classes = [TokenAuthentication]
@@ -401,7 +321,7 @@ class ThreadMessageView(APIView):
         thread_message_id = kwargs.get('message_id')
         
         try:
-            threadMessage = ThreadMessageModel.objects.get(id=thread_message_id, thread_channel_id=thread_channel_id)
+            threadMessage = ThreadMessageModel.objects.get(id=thread_message_id, thread_channel=thread_channel_id)
         except MessageModel.DoesNotExist:
             return Response({'detail': 'Message or Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
         
@@ -409,6 +329,27 @@ class ThreadMessageView(APIView):
         if content:
             threadMessage.content = content
             
+        
+        
+        threadMessage.save()
+
+        serializer = ThreadMessageSerializer(threadMessage)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+class ThreadEmojiView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def patch(self, request, *args, **kwargs):
+        thread_channel_id = kwargs.get('thread_channel_id')
+        thread_message_id = kwargs.get('message_id')
+    
+        try:
+            threadMessage = ThreadMessageModel.objects.get(id=thread_message_id, thread_channel_id=thread_channel_id)
+        except MessageModel.DoesNotExist:
+            return Response({'detail': 'Message or Channel not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
         # Listen von Diktaten, die die Benutzerdaten enthalten
         emoji_handsup_users = request.data.get('emoji_handsup', [])
         emoji_check_users = request.data.get('emoji_check', [])
