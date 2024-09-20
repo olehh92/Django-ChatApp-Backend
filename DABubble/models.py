@@ -62,5 +62,6 @@ class ThreadMessageModel(models.Model):
     emoji_check = models.ManyToManyField(User, related_name='emoji_check_thread', blank=True)
     emoji_nerd = models.ManyToManyField(User, related_name='emoji_nerd_thread', blank=True)
     emoji_rocket = models.ManyToManyField(User, related_name='emoji_rocket_thread', blank=True)
+    messageData = models.FileField(upload_to='ulpoads/', null=True, blank=True)
     def __str__(self):
         return f'{self.sender} - {self.content[:20]}'

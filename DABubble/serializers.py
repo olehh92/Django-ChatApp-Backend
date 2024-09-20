@@ -64,16 +64,19 @@ class UserSerializer(ModelSerializer):
         
         
 class ThreadMessageSerializer(serializers.ModelSerializer):
+    content = serializers.CharField(required=False)
     emoji_handsup = UserSerializer(many=True, required=False)
     emoji_check = UserSerializer(many=True, required=False)
     emoji_nerd = UserSerializer(many=True, required=False)
     emoji_rocket = UserSerializer(many=True, required=False)
+    messageData = serializers.FileField(required=False, allow_null=True)
     class Meta:
         model = ThreadMessageModel
-        fields = ['id', 'sender', 'thread_channel', 'content', 'timestamp', 'emoji_handsup', 'emoji_check', 'emoji_nerd', 'emoji_rocket']
+        fields = ['id', 'sender', 'thread_channel', 'content', 'timestamp', 'emoji_handsup', 'emoji_check', 'emoji_nerd', 'emoji_rocket', 'messageData']
         read_only_fields = ['sender']
 
 class MessageSerializer(serializers.ModelSerializer):
+    content = serializers.CharField(required=False)
     thread_channel = serializers.PrimaryKeyRelatedField(read_only=True)
     emoji_handsup = UserSerializer(many=True, required=False)
     emoji_check = UserSerializer(many=True, required=False)
