@@ -65,3 +65,4 @@ class ThreadMessageModel(models.Model):
     messageData = models.FileField(upload_to='ulpoads/', null=True, blank=True)
     def __str__(self):
         return f'{self.sender} - {self.content[:20]}'
+    

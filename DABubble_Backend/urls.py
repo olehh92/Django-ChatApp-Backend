@@ -19,11 +19,13 @@ from django.urls import path, include
 from DABubble.views import (RegistrationView, LoginView, 
                             AvatarModelViewSet, LogoutView, UsersView, ActiveUserView, 
                             AvatarUserModelView, ChannelView, MessageView, SingleChannelView, ThreadMessageView,
-                            ThreadEmojiView, MessageEmojiView)
+                            ThreadEmojiView, MessageEmojiView, PasswordRequestView )
 from django.conf import settings
 from django.conf.urls import include
 from rest_framework.routers import DefaultRouter
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+
 
 router = DefaultRouter()
 router.register(r'images', AvatarModelViewSet, basename='image')
@@ -51,7 +53,13 @@ urlpatterns = [
     # Thread Message URLs
     path('channelThread/<int:thread_channel_id>/messages/', ThreadMessageView.as_view(), name='messageThread-list'),
     path('channelThread/<int:thread_channel_id>/messages/<int:message_id>/', ThreadMessageView.as_view(), name='messageThread-detail'),
-    path('channelThread/<int:thread_channel_id>/messages/<int:message_id>/emoji/', ThreadEmojiView.as_view(), name='messageThreadEmoji')
+    path('channelThread/<int:thread_channel_id>/messages/<int:message_id>/emoji/', ThreadEmojiView.as_view(), name='messageThreadEmoji'),
+
+    # password reset
+    path('password_reset/', PasswordRequestView.as_view(), name='password_reset'),  
+    # path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

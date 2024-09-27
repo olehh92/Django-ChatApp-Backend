@@ -1,4 +1,5 @@
 import logging
+from django.conf import settings
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -16,6 +17,13 @@ from rest_framework.views import APIView
 from django.db import models
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import AllowAny
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.utils.html import strip_tags
+from django.contrib.auth.tokens import default_token_generator
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 
 logger = logging.getLogger(__name__)
@@ -370,3 +378,39 @@ class ThreadEmojiView(APIView):
 
         serializer = ThreadMessageSerializer(threadMessage)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+class PasswordRequestView(APIView):
+    permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('emailName')
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return JsonResponse({"error": "User with this email does not exist"}, status=400)
+
+        token = default_token_generator.make_token(user)
+        reset_link = f'http://localhost:4200/reset-password?token={token}&uid={user.pk}'
+
+        subject = 'DABubble Password Reset Request'
+        html_content = render_to_string('password_reset_email.html', {
+            'username': user.username,
+            'reset_link': reset_link,
+        })
+
+        text_content = strip_tags(html_content)
+
+        send_mail(
+            subject,
+            text_content,
+            settings.EMAIL_HOST_USER,
+            [email],
+            fail_silently=False,
+            html_message=html_content
+        )
+
+        return JsonResponse({"message": "Password reset link sent successfully"}, status=200)

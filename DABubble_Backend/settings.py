@@ -54,13 +54,22 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+
+CSRF_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = ['http://localhost:4200']
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:4200',  # Angular-Frontend
+]
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SECURE = False  # Auf `True` setzen, wenn du HTTPS verwendest
 
 ROOT_URLCONF = 'DABubble_Backend.urls'
 
@@ -140,6 +149,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1",
 ]
 
+
+
 INTERNAL_IPS = [
     '127.0.0.1'
 ]
@@ -153,3 +164,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False  
+EMAIL_USE_SSL = True  
+EMAIL_HOST_USER = 'TimNowak195@gmail.com'
+EMAIL_HOST_PASSWORD = 'dhlt krqd soeo fndj'
+DEFAULT_FROM_EMAIL = 'DABubble@gmail.com'
