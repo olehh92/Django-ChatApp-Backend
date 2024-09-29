@@ -414,3 +414,23 @@ class PasswordRequestView(APIView):
         )
 
         return JsonResponse({"message": "Password reset link sent successfully"}, status=200)
+
+
+class PasswordResetConfirm(APIView):
+    def post(self, request, *args, **kwargs):
+        
+        token = request.data.get('token')
+        userId = request.data.get('uid')
+        new_password = request.data.get('password')
+        
+        try:
+            user = User.objects.get(pk=userId)
+        except User.DoesNotExist:
+            return Response({"error": "Invalid user"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if default_token_generator.check_token(user, token):
+            user.set_password(new_password)
+            user.save()
+            return Response({"message": "Password reset successful"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"erorr": "Invalid or expired token"}, status=status.HTTP_400_BAD_REQUEST)
