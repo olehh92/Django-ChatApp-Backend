@@ -7,7 +7,7 @@ class AvatarModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     image_path = models.CharField(max_length=255, blank=True, null=True)
-    default_image_path = 'images/default.jpg' 
+    default_image_path = 'assets/img/avatar/avatar_empty.svg' 
 
     def save(self, *args, **kwargs):
         if not self.image and not self.image_path:
