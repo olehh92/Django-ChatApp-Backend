@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ger" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DABubble.migrations package &mdash; DABubble none documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=23684f09"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DABubble
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">DABubble.migrations package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#dabubble-migrations-0001-initial-module">DABubble.migrations.0001_initial module</a></li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0002_delete_customuser">DABubble.migrations.0002_delete_customuser module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0002_delete_customuser.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0002_delete_customuser.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0002_delete_customuser.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0003_initial">DABubble.migrations.0003_initial module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0003_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0003_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0003_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0003_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dabubble-migrations-0004-avatarmodel-user-module">DABubble.migrations.0004_avatarmodel_user module</a></li>
+<li><a class="reference internal" href="#dabubble-migrations-0005-alter-avatarmodel-user-module">DABubble.migrations.0005_alter_avatarmodel_user module</a></li>
+<li><a class="reference internal" href="#dabubble-migrations-0006-channelmodel-messagemodel-threadchannelmodel-and-more-module">DABubble.migrations.0006_channelmodel_messagemodel_threadchannelmodel_and_more module</a></li>
+<li><a class="reference internal" href="#dabubble-migrations-0007-alter-channelmodel-createdfrom-and-more-module">DABubble.migrations.0007_alter_channelmodel_createdfrom_and_more module</a></li>
+<li><a class="reference internal" href="#dabubble-migrations-0008-messagemodel-emoji-check-messagemodel-emoji-handsup-and-more-module">DABubble.migrations.0008_messagemodel_emoji_check_messagemodel_emoji_handsup_and_more module</a></li>
+<li><a class="reference internal" href="#dabubble-migrations-0009-threadmessagemodel-emoji-check-and-more-module">DABubble.migrations.0009_threadmessagemodel_emoji_check_and_more module</a></li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id">DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0011_alter_threadchannelmodel_mainchannel">DABubble.migrations.0011_alter_threadchannelmodel_mainchannel module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0012_alter_threadchannelmodel_mainchannel">DABubble.migrations.0012_alter_threadchannelmodel_mainchannel module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel">DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0014_messagemodel_messagedata">DABubble.migrations.0014_messagemodel_messagedata module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0014_messagemodel_messagedata.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0014_messagemodel_messagedata.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0014_messagemodel_messagedata.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0015_alter_messagemodel_messagedata">DABubble.migrations.0015_alter_messagemodel_messagedata module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0015_alter_messagemodel_messagedata.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0015_alter_messagemodel_messagedata.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0015_alter_messagemodel_messagedata.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0016_alter_messagemodel_messagedata">DABubble.migrations.0016_alter_messagemodel_messagedata module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0016_alter_messagemodel_messagedata.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0016_alter_messagemodel_messagedata.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0016_alter_messagemodel_messagedata.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations.0017_threadmessagemodel_messagedata">DABubble.migrations.0017_threadmessagemodel_messagedata module</a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0017_threadmessagemodel_messagedata.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li><a class="reference internal" href="#DABubble.migrations.0017_threadmessagemodel_messagedata.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li><a class="reference internal" href="#DABubble.migrations.0017_threadmessagemodel_messagedata.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DABubble.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DABubble</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DABubble.migrations package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/DABubble.migrations.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dabubble-migrations-package">
+<h1>DABubble.migrations package<a class="headerlink" href="#dabubble-migrations-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="dabubble-migrations-0001-initial-module">
+<h2>DABubble.migrations.0001_initial module<a class="headerlink" href="#dabubble-migrations-0001-initial-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-DABubble.migrations.0002_delete_customuser">
+<span id="dabubble-migrations-0002-delete-customuser-module"></span><h2>DABubble.migrations.0002_delete_customuser module<a class="headerlink" href="#module-DABubble.migrations.0002_delete_customuser" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0002_delete_customuser.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0002_delete_customuser.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0002_delete_customuser.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0002_delete_customuser.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0002_delete_customuser.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0001_initial')]</span></em><a class="headerlink" href="#DABubble.migrations.0002_delete_customuser.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0002_delete_customuser.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;DeleteModel</span>&#160; <span class="pre">name='CustomUser'&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0002_delete_customuser.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0003_initial">
+<span id="dabubble-migrations-0003-initial-module"></span><h2>DABubble.migrations.0003_initial module<a class="headerlink" href="#module-DABubble.migrations.0003_initial" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0003_initial.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0003_initial.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0003_initial.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0003_initial.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0003_initial.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0002_delete_customuser')]</span></em><a class="headerlink" href="#DABubble.migrations.0003_initial.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0003_initial.Migration.initial">
+<span class="sig-name descname"><span class="pre">initial</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#DABubble.migrations.0003_initial.Migration.initial" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0003_initial.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='AvatarModel',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('image',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('image_path',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;)]&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0003_initial.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="dabubble-migrations-0004-avatarmodel-user-module">
+<h2>DABubble.migrations.0004_avatarmodel_user module<a class="headerlink" href="#dabubble-migrations-0004-avatarmodel-user-module" title="Link to this heading"></a></h2>
+</section>
+<section id="dabubble-migrations-0005-alter-avatarmodel-user-module">
+<h2>DABubble.migrations.0005_alter_avatarmodel_user module<a class="headerlink" href="#dabubble-migrations-0005-alter-avatarmodel-user-module" title="Link to this heading"></a></h2>
+</section>
+<section id="dabubble-migrations-0006-channelmodel-messagemodel-threadchannelmodel-and-more-module">
+<h2>DABubble.migrations.0006_channelmodel_messagemodel_threadchannelmodel_and_more module<a class="headerlink" href="#dabubble-migrations-0006-channelmodel-messagemodel-threadchannelmodel-and-more-module" title="Link to this heading"></a></h2>
+</section>
+<section id="dabubble-migrations-0007-alter-channelmodel-createdfrom-and-more-module">
+<h2>DABubble.migrations.0007_alter_channelmodel_createdfrom_and_more module<a class="headerlink" href="#dabubble-migrations-0007-alter-channelmodel-createdfrom-and-more-module" title="Link to this heading"></a></h2>
+</section>
+<section id="dabubble-migrations-0008-messagemodel-emoji-check-messagemodel-emoji-handsup-and-more-module">
+<h2>DABubble.migrations.0008_messagemodel_emoji_check_messagemodel_emoji_handsup_and_more module<a class="headerlink" href="#dabubble-migrations-0008-messagemodel-emoji-check-messagemodel-emoji-handsup-and-more-module" title="Link to this heading"></a></h2>
+</section>
+<section id="dabubble-migrations-0009-threadmessagemodel-emoji-check-and-more-module">
+<h2>DABubble.migrations.0009_threadmessagemodel_emoji_check_and_more module<a class="headerlink" href="#dabubble-migrations-0009-threadmessagemodel-emoji-check-and-more-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id">
+<span id="dabubble-migrations-0010-rename-thread-channel-threadmessagemodel-thread-channel-id-module"></span><h2>DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id module<a class="headerlink" href="#module-DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0010_rename_thread_channel_threadmessagemodel_thread_channel_id.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0009_threadmessagemodel_emoji_check_and_more')]</span></em><a class="headerlink" href="#DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RenameField</span>&#160; <span class="pre">model_name='threadmessagemodel',</span> <span class="pre">old_name='thread_channel',</span> <span class="pre">new_name='thread_channel_id'&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0011_alter_threadchannelmodel_mainchannel">
+<span id="dabubble-migrations-0011-alter-threadchannelmodel-mainchannel-module"></span><h2>DABubble.migrations.0011_alter_threadchannelmodel_mainchannel module<a class="headerlink" href="#module-DABubble.migrations.0011_alter_threadchannelmodel_mainchannel" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0011_alter_threadchannelmodel_mainchannel.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0010_rename_thread_channel_threadmessagemodel_thread_channel_id')]</span></em><a class="headerlink" href="#DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='threadchannelmodel',</span> <span class="pre">name='mainChannel',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0011_alter_threadchannelmodel_mainchannel.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0012_alter_threadchannelmodel_mainchannel">
+<span id="dabubble-migrations-0012-alter-threadchannelmodel-mainchannel-module"></span><h2>DABubble.migrations.0012_alter_threadchannelmodel_mainchannel module<a class="headerlink" href="#module-DABubble.migrations.0012_alter_threadchannelmodel_mainchannel" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0012_alter_threadchannelmodel_mainchannel.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0011_alter_threadchannelmodel_mainchannel')]</span></em><a class="headerlink" href="#DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='threadchannelmodel',</span> <span class="pre">name='mainChannel',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0012_alter_threadchannelmodel_mainchannel.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel">
+<span id="dabubble-migrations-0013-rename-thread-channel-id-threadmessagemodel-thread-channel-module"></span><h2>DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel module<a class="headerlink" href="#module-DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0013_rename_thread_channel_id_threadmessagemodel_thread_channel.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0012_alter_threadchannelmodel_mainchannel')]</span></em><a class="headerlink" href="#DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RenameField</span>&#160; <span class="pre">model_name='threadmessagemodel',</span> <span class="pre">old_name='thread_channel_id',</span> <span class="pre">new_name='thread_channel'&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0014_messagemodel_messagedata">
+<span id="dabubble-migrations-0014-messagemodel-messagedata-module"></span><h2>DABubble.migrations.0014_messagemodel_messagedata module<a class="headerlink" href="#module-DABubble.migrations.0014_messagemodel_messagedata" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0014_messagemodel_messagedata.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0014_messagemodel_messagedata.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0014_messagemodel_messagedata.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0014_messagemodel_messagedata.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0014_messagemodel_messagedata.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0013_rename_thread_channel_id_threadmessagemodel_thread_channel')]</span></em><a class="headerlink" href="#DABubble.migrations.0014_messagemodel_messagedata.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0014_messagemodel_messagedata.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='messagemodel',</span> <span class="pre">name='messageData',</span> <span class="pre">field=&lt;django.db.models.fields.files.FileField&gt;&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0014_messagemodel_messagedata.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0015_alter_messagemodel_messagedata">
+<span id="dabubble-migrations-0015-alter-messagemodel-messagedata-module"></span><h2>DABubble.migrations.0015_alter_messagemodel_messagedata module<a class="headerlink" href="#module-DABubble.migrations.0015_alter_messagemodel_messagedata" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0015_alter_messagemodel_messagedata.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0015_alter_messagemodel_messagedata.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0015_alter_messagemodel_messagedata.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0015_alter_messagemodel_messagedata.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0015_alter_messagemodel_messagedata.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0014_messagemodel_messagedata')]</span></em><a class="headerlink" href="#DABubble.migrations.0015_alter_messagemodel_messagedata.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0015_alter_messagemodel_messagedata.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='messagemodel',</span> <span class="pre">name='messageData',</span> <span class="pre">field=&lt;django.db.models.fields.files.FileField&gt;&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0015_alter_messagemodel_messagedata.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0016_alter_messagemodel_messagedata">
+<span id="dabubble-migrations-0016-alter-messagemodel-messagedata-module"></span><h2>DABubble.migrations.0016_alter_messagemodel_messagedata module<a class="headerlink" href="#module-DABubble.migrations.0016_alter_messagemodel_messagedata" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0016_alter_messagemodel_messagedata.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0016_alter_messagemodel_messagedata.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0016_alter_messagemodel_messagedata.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0016_alter_messagemodel_messagedata.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0016_alter_messagemodel_messagedata.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0015_alter_messagemodel_messagedata')]</span></em><a class="headerlink" href="#DABubble.migrations.0016_alter_messagemodel_messagedata.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0016_alter_messagemodel_messagedata.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='messagemodel',</span> <span class="pre">name='messageData',</span> <span class="pre">field=&lt;django.db.models.fields.files.FileField&gt;&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0016_alter_messagemodel_messagedata.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations.0017_threadmessagemodel_messagedata">
+<span id="dabubble-migrations-0017-threadmessagemodel-messagedata-module"></span><h2>DABubble.migrations.0017_threadmessagemodel_messagedata module<a class="headerlink" href="#module-DABubble.migrations.0017_threadmessagemodel_messagedata" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DABubble.migrations.0017_threadmessagemodel_messagedata.Migration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DABubble.migrations.0017_threadmessagemodel_messagedata.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DABubble/migrations/0017_threadmessagemodel_messagedata.html#Migration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DABubble.migrations.0017_threadmessagemodel_messagedata.Migration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0017_threadmessagemodel_messagedata.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('DABubble',</span> <span class="pre">'0016_alter_messagemodel_messagedata')]</span></em><a class="headerlink" href="#DABubble.migrations.0017_threadmessagemodel_messagedata.Migration.dependencies" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DABubble.migrations.0017_threadmessagemodel_messagedata.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='threadmessagemodel',</span> <span class="pre">name='messageData',</span> <span class="pre">field=&lt;django.db.models.fields.files.FileField&gt;&gt;]</span></em><a class="headerlink" href="#DABubble.migrations.0017_threadmessagemodel_messagedata.Migration.operations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DABubble.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-DABubble.migrations" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Tim Widl.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

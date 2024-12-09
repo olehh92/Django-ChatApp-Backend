@@ -1,0 +1,149 @@
+DABubble.migrations package
+===========================
+
+Submodules
+----------
+
+DABubble.migrations.0001\_initial module
+----------------------------------------
+
+.. automodule:: DABubble.migrations.0001_initial
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0002\_delete\_customuser module
+---------------------------------------------------
+
+.. automodule:: DABubble.migrations.0002_delete_customuser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0003\_initial module
+----------------------------------------
+
+.. automodule:: DABubble.migrations.0003_initial
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0004\_avatarmodel\_user module
+--------------------------------------------------
+
+.. automodule:: DABubble.migrations.0004_avatarmodel_user
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0005\_alter\_avatarmodel\_user module
+---------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0005_alter_avatarmodel_user
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0006\_channelmodel\_messagemodel\_threadchannelmodel\_and\_more module
+------------------------------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0006_channelmodel_messagemodel_threadchannelmodel_and_more
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0007\_alter\_channelmodel\_createdfrom\_and\_more module
+----------------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0007_alter_channelmodel_createdfrom_and_more
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0008\_messagemodel\_emoji\_check\_messagemodel\_emoji\_handsup\_and\_more module
+----------------------------------------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0008_messagemodel_emoji_check_messagemodel_emoji_handsup_and_more
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0009\_threadmessagemodel\_emoji\_check\_and\_more module
+----------------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0009_threadmessagemodel_emoji_check_and_more
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0010\_rename\_thread\_channel\_threadmessagemodel\_thread\_channel\_id module
+-------------------------------------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0010_rename_thread_channel_threadmessagemodel_thread_channel_id
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0011\_alter\_threadchannelmodel\_mainchannel module
+-----------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0011_alter_threadchannelmodel_mainchannel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0012\_alter\_threadchannelmodel\_mainchannel module
+-----------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0012_alter_threadchannelmodel_mainchannel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0013\_rename\_thread\_channel\_id\_threadmessagemodel\_thread\_channel module
+-------------------------------------------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0013_rename_thread_channel_id_threadmessagemodel_thread_channel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0014\_messagemodel\_messagedata module
+----------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0014_messagemodel_messagedata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0015\_alter\_messagemodel\_messagedata module
+-----------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0015_alter_messagemodel_messagedata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0016\_alter\_messagemodel\_messagedata module
+-----------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0016_alter_messagemodel_messagedata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble.migrations.0017\_threadmessagemodel\_messagedata module
+----------------------------------------------------------------
+
+.. automodule:: DABubble.migrations.0017_threadmessagemodel_messagedata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: DABubble.migrations
+   :members:
+   :undoc-members:
+   :show-inheritance:
