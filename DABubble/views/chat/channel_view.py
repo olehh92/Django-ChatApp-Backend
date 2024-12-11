@@ -30,7 +30,14 @@ class ChannelView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        data = request.data.copy() 
+        data = request.data.copy()
+        
+        channel_name = data.get("channelName")
+        if ChannelModel.objects.filter(channelName__iexact=channel_name).exists():
+            return Response(
+                {"error": "A channel with this name already exists."},
+                status=status.HTTP_400_BAD_REQUEST
+            ) 
 
         serializer = ChannelSerializer(data=data) 
         if serializer.is_valid():

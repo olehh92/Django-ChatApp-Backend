@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +32,10 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:4200','127.0.0.1']
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "http://127.0.0.1",
+]
 
 # Application definition
 
@@ -144,12 +148,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "http://127.0.0.1",
-]
-
-
 
 INTERNAL_IPS = [
     '127.0.0.1'
@@ -165,11 +163,18 @@ REST_FRAMEWORK = {
     ],
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False  
-EMAIL_USE_SSL = True  
-EMAIL_HOST_USER = 'TimNowak195@gmail.com'
-EMAIL_HOST_PASSWORD = 'dhlt krqd soeo fndj'
-DEFAULT_FROM_EMAIL = 'DABubble@gmail.com'
+# environ initialisieren
+env = environ.Env()
+
+# .env-Datei laden
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+# E-Mail-Konfiguration aus der .env-Datei laden
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env.int('EMAIL_PORT') 
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')  
+EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL')  
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
