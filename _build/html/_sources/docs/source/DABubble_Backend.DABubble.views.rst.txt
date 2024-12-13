@@ -1,0 +1,18 @@
+DABubble\_Backend.DABubble.views package
+========================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   DABubble_Backend.DABubble.views.authentication
+
+Module contents
+---------------
+
+.. automodule:: DABubble_Backend.DABubble.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

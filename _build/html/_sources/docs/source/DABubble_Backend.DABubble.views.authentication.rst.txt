@@ -1,0 +1,53 @@
+DABubble\_Backend.DABubble.views.authentication package
+=======================================================
+
+Submodules
+----------
+
+DABubble\_Backend.DABubble.views.authentication.avatarModel\_view module
+------------------------------------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.views.authentication.avatarModel_view
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.views.authentication.login\_view module
+------------------------------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.views.authentication.login_view
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.views.authentication.logout\_view module
+-------------------------------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.views.authentication.logout_view
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.views.authentication.passwordReset\_view module
+--------------------------------------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.views.authentication.passwordReset_view
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.views.authentication.regestration\_view module
+-------------------------------------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.views.authentication.regestration_view
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: DABubble_Backend.DABubble.views.authentication
+   :members:
+   :undoc-members:
+   :show-inheritance:

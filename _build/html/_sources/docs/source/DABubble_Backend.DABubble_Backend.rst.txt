@@ -1,0 +1,45 @@
+DABubble\_Backend.DABubble\_Backend package
+===========================================
+
+Submodules
+----------
+
+DABubble\_Backend.DABubble\_Backend.asgi module
+-----------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble_Backend.asgi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble\_Backend.settings module
+---------------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble_Backend.settings
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble\_Backend.urls module
+-----------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble_Backend.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble\_Backend.wsgi module
+-----------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble_Backend.wsgi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: DABubble_Backend.DABubble_Backend
+   :members:
+   :undoc-members:
+   :show-inheritance:

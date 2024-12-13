@@ -1,0 +1,38 @@
+DABubble\_Backend package
+=========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   DABubble_Backend.DABubble
+   DABubble_Backend.DABubble_Backend
+
+Submodules
+----------
+
+DABubble\_Backend.conf module
+-----------------------------
+
+.. automodule:: DABubble_Backend.conf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.manage module
+-------------------------------
+
+.. automodule:: DABubble_Backend.manage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: DABubble_Backend
+   :members:
+   :undoc-members:
+   :show-inheritance:

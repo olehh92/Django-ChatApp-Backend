@@ -1,0 +1,78 @@
+DABubble\_Backend.DABubble package
+==================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   DABubble_Backend.DABubble.migrations
+   DABubble_Backend.DABubble.views
+
+Submodules
+----------
+
+DABubble\_Backend.DABubble.admin module
+---------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.apps module
+--------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.forms module
+---------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.forms
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.models module
+----------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.serializers module
+---------------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.tests module
+---------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+DABubble\_Backend.DABubble.views module
+---------------------------------------
+
+.. automodule:: DABubble_Backend.DABubble.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: DABubble_Backend.DABubble
+   :members:
+   :undoc-members:
+   :show-inheritance:
